@@ -1,0 +1,11 @@
+name: CLM-PvP
+version: '1.0'
+main: de.clmpvp.clmpvp.main.Main
+api-version: '1.20'
+commands:
+  fly:
+  cc:
+  clearchat:
+  build:
+  scoreboardreload:
+  spawn:

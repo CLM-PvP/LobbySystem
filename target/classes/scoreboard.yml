@@ -1,0 +1,6 @@
+scoreboard:
+  title: "&b&lCLM-PvP"  # Titel des Scoreboards
+  separator: "&7-----------------"  # Separator für das Scoreboard
+  nameLine: "&bName: &7%playerName%"  # Platzhalter %playerName% wird durch den Spielernamen ersetzt
+  rankLine: "&bRang: &7%rank%"  # Platzhalter %rank% wird durch den Rang ersetzt
+  ip: "§bCLM-PvP.net"
