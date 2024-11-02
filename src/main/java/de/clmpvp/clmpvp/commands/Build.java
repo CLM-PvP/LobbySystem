@@ -121,7 +121,7 @@ public class Build implements CommandExecutor {
             }
 
         } else {
-            sender.sendMessage(Main.noperm);
+            sender.sendMessage(configManager.getNoPerm());
         }
 
 

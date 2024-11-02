@@ -19,12 +19,18 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 public class Compass implements Listener {
 
     private final ConfigManager configManager;
+    private final Main plugin;
 
-    public Compass(ConfigManager configManager) {
+    public Compass(ConfigManager configManager, Main plugin) {
         this.configManager = configManager;
+        this.plugin = plugin;
     }
 
     @EventHandler
@@ -60,10 +66,15 @@ public class Compass implements Listener {
             if (e.getView().getTitle().equalsIgnoreCase("§bNavigator")) {
                 e.setCancelled(true);
                 try {
-                    if (e.getCurrentItem().getType() == Material.GRASS_BLOCK) {
-                        if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7CityBuild")) {
+                    if (e.getCurrentItem() != null && e.getCurrentItem().getType() == Material.GRASS_BLOCK) {
+                        if (e.getCurrentItem().getItemMeta() != null &&
+                                e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7CityBuild")) {
+
                             p.sendMessage(prefix + "Du wirst zum CityBuild gesendet");
                             p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 5, 5);
+
+                            // Sende Spieler zu "CityBuild"-Server
+                            sendPlayerToServer(p, "CityBuild");
                         }
                     }
                 } catch (Exception ex) {
@@ -74,6 +85,18 @@ public class Compass implements Listener {
         } catch (RuntimeException ex) {
             p.sendMessage("Fehler 3");
             throw new RuntimeException(ex);
+        }
+    }
+    private void sendPlayerToServer(Player p, String serverName) {
+        try {
+            ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+            DataOutputStream out = new DataOutputStream(byteArray);
+            out.writeUTF("Connect");
+            out.writeUTF(serverName);
+            p.sendPluginMessage(plugin, "BungeeCord", byteArray.toByteArray());
+        } catch (IOException e) {
+            p.sendMessage("Fehler beim Verbinden zum Server.");
+            throw new RuntimeException(e);
         }
     }
 

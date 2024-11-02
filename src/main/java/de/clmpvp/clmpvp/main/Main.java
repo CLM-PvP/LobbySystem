@@ -3,6 +3,7 @@ package de.clmpvp.clmpvp.main;
 import de.clmpvp.clmpvp.commands.Build;
 import de.clmpvp.clmpvp.commands.ClearChat;
 import de.clmpvp.clmpvp.commands.Fly;
+import de.clmpvp.clmpvp.commands.Gamemodes;
 import de.clmpvp.clmpvp.interact.AdminTools;
 import de.clmpvp.clmpvp.interact.Compass;
 import de.clmpvp.clmpvp.interact.PlayerHider;
@@ -28,7 +29,6 @@ public final class Main extends JavaPlugin {
     private FileConfiguration config;
 
 
-    public static String noperm = "§7[§bCLM-PvP§7] &cDazu hast du keine Rechte";
     public static String console = "§7[§bCLM-PvP§7] Du musst ein Spieler sein";
     public static String world = "world";
 
@@ -57,7 +57,7 @@ public final class Main extends JavaPlugin {
 
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new JoinItems(), this);
-        pm.registerEvents(new Compass(configManager), this);
+        pm.registerEvents(new Compass(configManager, this), this);
         pm.registerEvents(new PlayerHider(configManager), this);
         pm.registerEvents(new AdminTools(), this);
         pm.registerEvents(new JoinListener(), this);
@@ -77,6 +77,8 @@ public final class Main extends JavaPlugin {
         getCommand("clearchat").setExecutor(new ClearChat());
         getCommand("build").setExecutor(new Build(configManager));
         getCommand("spawn").setExecutor(new SpawnCommand(configManager));
+        getCommand("gm").setExecutor(new Gamemodes());
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
 
     }

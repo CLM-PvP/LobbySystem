@@ -29,6 +29,11 @@ public class ConfigManager {
         return ChatColor.translateAlternateColorCodes('&', rawPrefix);
     }
 
+    public String getNoPerm() {
+        String rawNoPerm = config.getString("prefix", getPrefix() + "&cDazu hast du keine Rechte &r");
+        return ChatColor.translateAlternateColorCodes('&', rawNoPerm);
+    }
+
     // --- SPAWN BEZOGENE METHODEN ---
 
     // Spawn setzen

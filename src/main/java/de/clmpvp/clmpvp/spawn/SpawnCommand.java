@@ -28,18 +28,21 @@ public class SpawnCommand implements CommandExecutor {
             return true;
         }
 
-        if (args.length == 1 && args[0].equalsIgnoreCase("set")) {
-            configManager.setSpawn(player.getLocation());
-            player.sendMessage(prefix + "§7Spawnpunkt erfolgreich gesetzt.");
-        } else {
-            Location spawn = configManager.getSpawn();
-            if (spawn == null) {
-                player.sendMessage(prefix + "§cDer Spawnpunkt wurde noch nicht gesetzt.");
+        if (player.hasPermission("lobby.spawn.set") || player.hasPermission("lobby.*")) {
+            if (args.length == 1 && args[0].equalsIgnoreCase("set")) {
+                configManager.setSpawn(player.getLocation());
+                player.sendMessage(prefix + "§7Spawnpunkt erfolgreich gesetzt.");
             } else {
-                player.teleport(spawn);
-                player.sendMessage(prefix + "Du wurdest zum Spawn teleportiert.");
+                Location spawn = configManager.getSpawn();
+                if (spawn == null) {
+                    player.sendMessage(prefix + "§cDer Spawnpunkt wurde noch nicht gesetzt.");
+                } else {
+                    player.teleport(spawn);
+                    player.sendMessage(prefix + "Du wurdest zum Spawn teleportiert.");
+                }
             }
         }
+
         return true;
     }
 }

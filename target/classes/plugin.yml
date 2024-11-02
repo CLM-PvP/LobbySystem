@@ -9,3 +9,4 @@ commands:
   build:
   scoreboardreload:
   spawn:
+  gm:

@@ -31,7 +31,7 @@ public class Fly implements CommandExecutor {
                     p.sendMessage(prefix + "Du kannst §ajetzt §7fliegen");
                 }
             } else {
-                p.sendMessage(Main.noperm);
+                p.sendMessage(configManager.getNoPerm());
             }
         }
         return false;

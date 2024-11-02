@@ -1,5 +1,6 @@
 de\clmpvp\clmpvp\scoreboard\MySQL.class
 de\clmpvp\clmpvp\scoreboard\ScoreboardJoin.class
+de\clmpvp\clmpvp\commands\Gamemodes.class
 de\clmpvp\clmpvp\main\Main.class
 de\clmpvp\clmpvp\listener\FoodListener.class
 de\clmpvp\clmpvp\listener\DoubleJump.class
